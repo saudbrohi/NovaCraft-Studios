@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NovaCraft Studios</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --neon-blue: #00ffff;
+      --neon-purple: #e600ff;
+      --text: #ffffff;
+      --glass: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+    }
+
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Orbitron', 'Poppins', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Particles (simulated) */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(0,255,255,0.1), transparent 40%),
+                  radial-gradient(circle at 70% 70%, rgba(230,0,255,0.1), transparent 40%);
+      z-index: -1;
+      animation: bgAnim 10s infinite linear;
+    }
+
+    @keyframes bgAnim {
+      0% { background-position: 0% 0%, 100% 100%; }
+      50% { background-position: 50% 50%, 50% 50%; }
+      100% { background-position: 0% 0%, 100% 100%; }
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: rgba(15, 15, 15, 0.8);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+    }
+
+    header h2 {
+      color: var(--neon-blue);
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    nav a {
+      color: var(--text);
+      margin-left: 25px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--neon-purple);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 10%;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: var(--neon-blue);
+      animation: textGlow 2s infinite alternate;
+    }
+
+    .typing {
+      font-size: 1.5rem;
+      margin-top: 20px;
+      color: var(--neon-purple);
+      border-right: 2px solid var(--neon-purple);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 5s steps(40, end) infinite;
+    }
+
+    @keyframes textGlow {
+      from { text-shadow: 0 0 10px var(--neon-blue); }
+      to { text-shadow: 0 0 20px var(--neon-purple); }
+    }
+
+    @keyframes typing {
+      0% { width: 0; }
+      50% { width: 100%; }
+      100% { width: 0; }
+    }
+
+    section {
+      padding: 100px 5%;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .service-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      padding: 30px;
+      width: 250px;
+      border-radius: 15px;
+      text-align: center;
+      font-weight: bold;
+      transition: 0.4s ease;
+      box-shadow: 0 0 10px var(--neon-purple);
+      backdrop-filter: blur(10px);
+    }
+
+    .service-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px var(--neon-blue);
+    }
+
+    .project {
+      width: 280px;
+      padding: 25px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      text-align: center;
+      transition: 0.4s;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 10px var(--neon-blue);
+    }
+
+    .project:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 0 25px var(--neon-purple);
+    }
+
+    .testimonial-slider {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 10px 0;
+      scroll-snap-type: x mandatory;
+    }
+
+    .testimonial {
+      scroll-snap-align: center;
+      flex: 0 0 250px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 15px rgba(0,255,255,0.1);
+    }
+
+    .testimonial img {
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .contact-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--neon-purple);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 50px;
+      border: none;
+      font-weight: bold;
+      box-shadow: 0 0 20px var(--neon-purple);
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 1000;
+    }
+
+    .contact-btn:hover {
+      background: var(--neon-blue);
+      box-shadow: 0 0 25px var(--neon-blue);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .modal-content {
+      background: var(--glass);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 20px var(--neon-purple);
+    }
+
+    .modal-content input,
+    .modal-content textarea {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      border-radius: 10px;
+    }
+
+    .modal-content button {
+      background: var(--neon-blue);
+      border: none;
+      padding: 10px 20px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 20px;
+      box-shadow: 0 0 15px var(--neon-blue);
+      transition: 0.3s;
+    }
+
+    .modal-content button:hover {
+      background: var(--neon-purple);
+      box-shadow: 0 0 20px var(--neon-purple);
+    }
+
+    .close {
+      float: right;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--neon-blue);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <h2>NovaCraft</h2>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#projects">Projects</a>
+      <a href="#testimonials">Testimonials</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div>
+      <h1>We Build Beautiful Digital Experiences</h1>
+      <div class="typing">Creative. Modern. Powerful.</div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About NovaCraft</h2>
+    <p style="max-width: 600px; margin: auto; text-align: center;">
+      NovaCraft Studios is a creative digital agency focused on stunning visuals and user-centric experiences. From branding to full-stack websites, we build bold digital stories.
+    </p>
+  </section>
+
+  <!-- Services -->
+  <section id="services">
+    <h2>Our Services</h2>
+    <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center;">
+      <div class="service-card">Web Design</div>
+      <div class="service-card">Branding</div>
+      <div class="service-card">UI/UX Design</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <h2>Recent Projects</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+      <div class="project">Project One</div>
+      <div class="project">Project Two</div>
+      <div class="project">Project Three</div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials">
+    <h2>Testimonials</h2>
+    <div class="testimonial-slider">
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/60?img=5" alt="">
+        <p>"Professional, futuristic, and beautiful work."</p>
+        <strong>- Sarah</strong>
+      </div>
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/60?img=7" alt="">
+        <p>"One of the best creative developers I've worked with."</p>
+        <strong>- David</strong>
+      </div>
+      <div class="testimonial">
+        <img src="https://i.pravatar.cc/60?img=9" alt="">
+        <p>"Design and user experience both nailed!"</p>
+        <strong>- Nina</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Button -->
+  <button class="contact-btn" onclick="document.getElementById('contact-modal').style.display='flex'">Contact Us</button>
+
+  <!-- Contact Modal -->
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span onclick="document.getElementById('contact-modal').style.display='none'" class="close">&times;</span>
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" required><br>
+        <input type="email" placeholder="Email Address" required><br>
+        <textarea placeholder="Message" rows="4" required></textarea><br>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer style="text-align: center; padding: 40px 0; background: #111;">
+    <p>© 2025 NovaCraft Studios</p>
+    <div class="social-icons">
+      <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+      <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+      <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+    </div>
+  </footer>
+
+  <!-- Social Icons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
